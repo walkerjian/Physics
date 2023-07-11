@@ -1,0 +1,54 @@
+(*Define the system of ODEs*)
+system = {y1'[t] == y2[t], y2'[t] == -0.5*y1[t], y3'[t] == y4[t], 
+   y4'[t] == -0.5*y3[t]};
+
+(*Initial conditions*)
+initialConditions = {y1[0] == 1, y2[0] == 0, y3[0] == 0, y4[0] == 1};
+
+(*Initial and final time*)
+t0 = 0;
+tf = 1;
+
+(*Solve the system of ODEs*)
+sol = NDSolve[{system, initialConditions}, {y1, y2, y3, y4}, {t, t0, 
+    tf}];
+
+(*Plot the solutions*)
+Plot[Evaluate[{y1[t], y2[t], y3[t], y4[t]} /. sol], {t, t0, tf}, 
+ PlotLabels -> {"y1(t)", "y2(t)", "y3(t)", "y4(t)"}, 
+ PlotLegends -> {"y1(t)", "y2(t)", "y3(t)", "y4(t)"}, 
+ PlotLabel -> "Solutions to the System of ODEs", 
+ AxesLabel -> {"t", "y(t)"}]
+
+(*Define the system of ODEs*)
+system = {y1'[t] == y2[t]^2, y2'[t] == -0.5*y1[t], y3'[t] == y4[t]^2, 
+   y4'[t] == -0.5*y3[t]};
+
+(*Initial conditions*)
+initialConditions = {y1[0] == 1, y2[0] == 0, y3[0] == 0, y4[0] == 1};
+
+(*Solve the system of ODEs and plot the solutions*)
+sol = NDSolve[{system, initialConditions}, {y1, y2, y3, y4}, {t, t0, 
+    tf}];
+Plot[Evaluate[{y1[t], y2[t], y3[t], y4[t]} /. sol], {t, t0, tf}, 
+ PlotLabels -> {"y1(t)", "y2(t)", "y3(t)", "y4(t)"}, 
+ PlotLegends -> {"y1(t)", "y2(t)", "y3(t)", "y4(t)"}, 
+ PlotLabel -> "Test Case 2: Solutions to the System of ODEs", 
+ AxesLabel -> {"t", "y(t)"}]
+
+
+(*Define the system of ODEs*)
+system = {y1'[t] == y2[t], y2'[t] == -10.5*y1[t], y3'[t] == y4[t], 
+   y4'[t] == -0.5*y3[t]};
+
+(*Initial conditions*)
+initialConditions = {y1[0] == 0, y2[0] == 1, y3[0] == 1, y4[0] == 0};
+
+(*Solve the system of ODEs and plot the solutions*)
+sol = NDSolve[{system, initialConditions}, {y1, y2, y3, y4}, {t, t0, 
+    tf}];
+Plot[Evaluate[{y1[t], y2[t], y3[t], y4[t]} /. sol], {t, t0, tf}, 
+ PlotLabels -> {"y1(t)", "y2(t)", "y3(t)", "y4(t)"}, 
+ PlotLegends -> {"y1(t)", "y2(t)", "y3(t)", "y4(t)"}, 
+ PlotLabel -> "Test Case 3: Solutions to the System of ODEs", 
+ AxesLabel -> {"t", "y(t)"}]

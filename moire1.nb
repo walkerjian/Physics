@@ -1,0 +1,35 @@
+(*Define a function to generate a 2D lattice.*)
+createLattice[n_, latticeVectors_] := 
+  Flatten[Table[
+    i latticeVectors[[1]] + j latticeVectors[[2]], {i, -n, n}, {j, -n,
+      n}], 1];
+
+(*Define a function to rotate the lattice by a given angle.*)
+
+rotateLattice[lattice_, angle_] := 
+  RotationTransform[angle][#] & /@ lattice;
+
+(*Define a function to plot the interference pattern of two lattices.*)
+
+plotInterference[lattice1_, lattice2_] := 
+  Show[ListPlot[lattice1, AspectRatio -> Automatic, 
+    PlotStyle -> PointSize[Large]], 
+   ListPlot[lattice2, AspectRatio -> Automatic, 
+    PlotStyle -> {PointSize[Large], Red}]];
+
+(*Define the lattice vectors for the two materials.*)
+
+latticeVectors1 = {{3/2, Sqrt[3]/2}, {3/2, -Sqrt[3]/2}};
+latticeVectors2 = {{2, 0}, {2, Sqrt[3]}};
+
+(*Generate the lattices for a given range.*)
+
+lattice1 = createLattice[10, latticeVectors1];
+lattice2 = createLattice[10, latticeVectors2];
+
+(*Define a Manipulate function to allow interactive adjustment of the \
+angle and spacing.*)
+
+Manipulate[lattice2Rotated = rotateLattice[lattice2, angle];
+ plotInterference[lattice1, lattice2Rotated], {angle, 0, 
+  2 Pi}, {spacing, 1, 10}]
